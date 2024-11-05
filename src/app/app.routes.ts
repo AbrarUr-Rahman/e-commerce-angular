@@ -5,6 +5,7 @@ import { AboutComponent } from './Pages/about/about.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { RegisterComponent } from './Pages/register/register.component';
 import { CartComponent } from './Pages/cart/cart.component';
+import { ContactComponent } from './Pages/contact/contact.component';
 
 export const routes: Routes = [
     {path:"",redirectTo:'home',pathMatch:'full'},
@@ -14,4 +15,5 @@ export const routes: Routes = [
     {path:'login',component:LoginComponent},
     {path:'register',component:RegisterComponent},
     {path:'cart',component:CartComponent},
+    {path:'contact',component:ContactComponent},
 ];

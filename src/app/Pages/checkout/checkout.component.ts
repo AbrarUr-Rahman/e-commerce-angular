@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent  {
-  subtotal = 100; // Sample value, replace with actual data
+  subtotal = 100; 
   shippingCost = 5;
-  taxRate = 0.08; // Example tax rate of 8%
+  taxRate = 0.08; 
 
   constructor() {}
 

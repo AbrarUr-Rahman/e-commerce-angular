@@ -32,7 +32,7 @@ export class CartService {
   }
 
   getCartItems() {
-    return this.cartItems$; // Return the observable directly, no need for asObservable
+    return this.cartItems$; 
   }
 
   removeFromCart(productId: number) {

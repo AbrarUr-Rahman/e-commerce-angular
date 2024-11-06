@@ -14,8 +14,8 @@ import { Product } from '../../domain/product';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  carouselProducts: Product[] = [];  // Array for carousel products
-  gridProducts: Product[] = [];      // Array for grid products
+  carouselProducts: Product[] = []; 
+  gridProducts: Product[] = [];      
 
   responsiveOptions: any[] | undefined;
 

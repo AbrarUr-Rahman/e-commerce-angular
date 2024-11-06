@@ -14,10 +14,10 @@ export class CartComponent {
   cartItems = [
     { id: 1, name: 'Product 1', image: '/assets/images/product1.jpg', price: 50, quantity: 1 },
     { id: 2, name: 'Product 2', image: '/assets/images/product2.jpg', price: 30, quantity: 2 },
-    // Add more products as needed
+    
   ];
   shippingCost = 5;
-  taxRate = 0.08; // Example tax rate of 8%
+  taxRate = 0.08; 
 
   constructor(private router: Router) {}
 

@@ -22,7 +22,7 @@ export class ProductsComponent {
   constructor(private productService: ProductService,private cartService:CartService) {}
 
   ngOnInit(): void {
-    // Fetch all products from the service
+  
     this.productService.getGridProducts().then((products) => {
       this.products = products;
     });

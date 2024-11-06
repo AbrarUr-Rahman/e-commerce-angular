@@ -1,1 +1,77 @@
-<p>home works!</p>
+<div class="card py-8 my-10">
+    <div class="carousel-container max-w-full mx-auto">
+        <!-- Carousel Section -->
+        <p-carousel 
+            [value]="carouselProducts"  
+            [numVisible]="3" 
+            [numScroll]="1" 
+            [circular]="true" 
+            [responsiveOptions]="responsiveOptions"
+            autoplayInterval="3000"
+            class="mb-8"
+            
+            
+        >
+            <ng-template let-product pTemplate="item">
+                <div class="border-1 surface-border border-round m-2 p-3 shadow-1 hover:shadow-4 transition-shadow">
+                    <div class="mb-3 relative">
+                        <img 
+                            [src]="product.image"  
+                            [alt]="product.name" 
+                            class="w-full h-80 object-fit rounded-md" 
+                        />
+                        <p-tag 
+                            [value]="product.inventoryStatus" 
+                            [severity]="getSeverity(product.inventoryStatus)" 
+                            class="absolute" 
+                            [ngStyle]="{ 'left.px': 10, 'top.px': 10 }" 
+                        />
+                    </div>
+                    <div class="mb-3 font-semibold text-center text-lg">
+                        {{ product.name }}
+                    </div>
+                    <div class="flex justify-content-between align-items-center">
+                        <div class="text-xl font-bold">
+                            {{ '$' + product.price }}
+                        </div>
+                        <span>
+                            <p-button icon="pi pi-heart" severity="secondary" [outlined]="true" />
+                            <p-button icon="pi pi-shopping-cart" class="ml-2" />
+                        </span>
+                    </div>
+                </div>
+            </ng-template>
+        </p-carousel>
+    </div>
+
+    <!-- Product Grid Section -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8 text-white text-xl">
+        <div *ngFor="let product of gridProducts" class="p-3 border-1 surface-border border-round shadow-1 hover:shadow-4 transition-shadow">
+            <div class="relative mb-3">
+                <img 
+                    [src]="product.image"  
+                    [alt]="product.name" 
+                    class="w-full h-64 object-cover rounded-md" 
+                />
+                <p-tag 
+                    [value]="product.inventoryStatus" 
+                    [severity]="getSeverity(product.inventoryStatus)" 
+                    class="absolute" 
+                    [ngStyle]="{ 'left.px': 10, 'top.px': 10 }" 
+                />
+            </div>
+            <div class="text-center mb-3 font-semibold text-lg">
+                {{ product.name }}
+            </div>
+            <div class="flex justify-content-between align-items-center">
+                <div class="text-xl font-bold">
+                    {{ '$' + product.price }}
+                </div>
+                <span>
+                    <p-button icon="pi pi-heart" severity="secondary" [outlined]="true" />
+                    <p-button icon="pi pi-shopping-cart" class="ml-2" />
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

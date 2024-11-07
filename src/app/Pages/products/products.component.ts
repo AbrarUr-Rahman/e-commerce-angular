@@ -5,15 +5,15 @@ import { CarouselModule } from 'primeng/carousel';
 import { TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
 import { CartService,CartItem } from '../../Service/cart.service';
-import { TitleCasePipe } from '@angular/common'; // Import TitleCasePipe
+import { TitleCasePipe } from '@angular/common'; 
 
 @Component({
   selector: 'app-products',
   standalone: true,
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
-  providers: [ProductService, CartService],
-  imports: [TitleCasePipe,CarouselModule,TagModule,ButtonModule] // Add TitleCasePipe to imports
+  providers: [ProductService],
+  imports: [TitleCasePipe,CarouselModule,TagModule,ButtonModule]
 })
 export class ProductsComponent  {
   products: Product[] = [];

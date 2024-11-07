@@ -26,29 +26,36 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  cartItems: CartItem[] = [];
+  cartItems: CartItem[] = [
+    { id: 3, name: "Mens Cotton Jacket", price: 55.99, quantity: 1, image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg" },
+    { id: 4, name: "Mens Casual Slim Fit", price: 15.99, quantity: 1, image: "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg" }
+  ];
   shippingCost = 5;
   taxRate = 0.08;
 
   constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit(): void {
-    console.log(this.cartItems)
-    this.cartService.cartItems$.subscribe(items => {
-      this.cartItems = items;
-    });
+    console.log(this.cartItems);
+    // this.cartService.getCartItems();
+    // this.cartService.cartItems$.subscribe(items => {
+    //   this.cartItems = items;
+    // });
   }
 
   get subtotal() {
-    return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    return Math.round(
+      this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0) * 100
+    ) / 100;
   }
+  
 
   get tax() {
-    return this.subtotal * this.taxRate;
+    return Math.round(this.subtotal * this.taxRate) ;
   }
 
   get total() {
-    return this.subtotal + this.tax + this.shippingCost;
+    return  this.subtotal + this.tax + this.shippingCost;
   }
 
   removeItem(product: CartItem) {

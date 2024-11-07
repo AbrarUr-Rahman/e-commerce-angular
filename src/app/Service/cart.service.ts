@@ -1,5 +1,6 @@
+// cart.service.ts
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface CartItem {
   id: number;
@@ -10,37 +11,31 @@ export interface CartItem {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class CartService {
-  private cartItems = new BehaviorSubject<CartItem[]>([]);
-  cartItems$ = this.cartItems.asObservable(); // We use this to expose the observable for subscription
+  private cartItemsSubject = new BehaviorSubject<CartItem[]>([]);
+  cartItems$ = this.cartItemsSubject.asObservable();
 
-  addToCart(product: CartItem) {
-    const items = this.cartItems.getValue();
-    const itemIndex = items.findIndex((item) => item.id === product.id);
+  addToCart(product: CartItem): void {
+    const currentItems = this.cartItemsSubject.value;
+    const existingItem = currentItems.find(item => item.id === product.id);
 
-    if (itemIndex > -1) {
-      // If the item already exists, increase the quantity
-      items[itemIndex].quantity += 1;
+    if (existingItem) {
+      existingItem.quantity += product.quantity;
     } else {
-      // If the item is new, add it to the cart
-      items.push({ ...product, quantity: 1 });
+      currentItems.push(product);
     }
 
-    this.cartItems.next(items);
+    this.cartItemsSubject.next([...currentItems]); // Update observable
   }
 
-  getCartItems() {
-    return this.cartItems$; 
+  removeFromCart(productId: number): void {
+    const currentItems = this.cartItemsSubject.value.filter(item => item.id !== productId);
+    this.cartItemsSubject.next(currentItems); // Update observable
   }
 
-  removeFromCart(productId: number) {
-    const items = this.cartItems.getValue().filter((item) => item.id !== productId);
-    this.cartItems.next(items);
-  }
-
-  clearCart() {
-    this.cartItems.next([]);
-  }
+  // clearCart(): void {
+  //   this.cartItemsSubject.next([]); // Clear the cart
+  // }
 }

@@ -1,5 +1,5 @@
-<div class="card py-8 my-10">
-    <div class="carousel-container max-w-full mx-auto">
+<div class="card py-8 my-10 bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 min-h-screen">
+    <div class="carousel-container max-w-6xl mx-auto">
         <!-- Carousel Section -->
         <p-carousel 
             [value]="carouselProducts"  
@@ -7,36 +7,29 @@
             [numScroll]="1" 
             [circular]="true" 
             [responsiveOptions]="responsiveOptions"
-            autoplayInterval="3000"
-            class="mb-8"
-            
-            
+            [autoplayInterval]="3000"
+            class="mb-12"
         >
             <ng-template let-product pTemplate="item">
-                <div class="border-1 surface-border border-round m-2 p-3 shadow-1 hover:shadow-4 transition-shadow">
-                    <div class="mb-3 relative">
+                <div class="border border-gray-300 border-round m-3 p-4 bg-white shadow-lg rounded-lg hover:shadow-xl transition-shadow">
+                    <div class="mb-3 relative overflow-hidden rounded-lg">
                         <img 
                             [src]="product.image"  
-                            [alt]="product.name" 
-                            class="w-full h-80 object-fit rounded-md" 
-                        />
-                        <p-tag 
-                            [value]="product.inventoryStatus" 
-                            [severity]="getSeverity(product.inventoryStatus)" 
-                            class="absolute" 
-                            [ngStyle]="{ 'left.px': 10, 'top.px': 10 }" 
+                            [alt]="product.title" 
+                            class="w-full h-64 object-contain rounded-lg transform hover:scale-105 transition-transform duration-300" 
                         />
                     </div>
-                    <div class="mb-3 font-semibold text-center text-lg">
-                        {{ product.name }}
+                    <div class="text-center font-semibold text-lg mb-2 text-gray-800">{{ product.title }}</div>
+                    <div class="text-center text-sm text-gray-500 mb-2">{{ product.category | titlecase }}</div>
+                    <div class="flex justify-center gap-1 text-yellow-500 mb-3">
+                        <span *ngFor="let star of [1,2,3,4,5]" class="pi" [ngClass]="{'pi-star': star <= product.rating.rate, 'pi-star-o': star > product.rating.rate}"></span>
+                        <span class="text-gray-600 text-sm">({{ product.rating.count }} reviews)</span>
                     </div>
-                    <div class="flex justify-content-between align-items-center">
-                        <div class="text-xl font-bold">
-                            {{ '$' + product.price }}
-                        </div>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xl font-bold text-indigo-600">{{ '$' + product.price }}</div>
                         <span>
-                            <p-button icon="pi pi-heart" severity="secondary" [outlined]="true" />
-                            <p-button icon="pi pi-shopping-cart" class="ml-2" />
+                            <p-button icon="pi pi-heart" severity="secondary" [outlined]="true"></p-button>
+                            <p-button icon="pi pi-shopping-cart" class="ml-2"></p-button>
                         </span>
                     </div>
                 </div>
@@ -45,31 +38,26 @@
     </div>
 
     <!-- Product Grid Section -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8 text-white text-xl">
-        <div *ngFor="let product of gridProducts" class="p-3 border-1 surface-border border-round shadow-1 hover:shadow-4 transition-shadow">
-            <div class="relative mb-3">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mt-12">
+        <div *ngFor="let product of gridProducts" class="p-4 border border-gray-300 border-round bg-white shadow-md rounded-lg hover:shadow-lg transition-shadow">
+            <div class="relative mb-4 overflow-hidden rounded-lg">
                 <img 
                     [src]="product.image"  
-                    [alt]="product.name" 
-                    class="w-full h-64 object-cover rounded-md" 
-                />
-                <p-tag 
-                    [value]="product.inventoryStatus" 
-                    [severity]="getSeverity(product.inventoryStatus)" 
-                    class="absolute" 
-                    [ngStyle]="{ 'left.px': 10, 'top.px': 10 }" 
+                    [alt]="product.title" 
+                    class="w-full h-64 object-contain rounded-lg transform hover:scale-105 transition-transform duration-300" 
                 />
             </div>
-            <div class="text-center mb-3 font-semibold text-lg">
-                {{ product.name }}
+            <div class="text-center font-semibold text-lg mb-2 text-gray-800">{{ product.title }}</div>
+            <div class="text-center text-sm text-gray-500 mb-2">{{ product.category | titlecase }}</div>
+            <div class="flex justify-center gap-1 text-yellow-500 mb-3">
+                <span *ngFor="let star of [1,2,3,4,5]" class="pi" [ngClass]="{'pi-star': star <= product.rating.rate, 'pi-star-o': star > product.rating.rate}"></span>
+                <span class="text-gray-600 text-sm">({{ product.rating.count }} reviews)</span>
             </div>
-            <div class="flex justify-content-between align-items-center">
-                <div class="text-xl font-bold">
-                    {{ '$' + product.price }}
-                </div>
+            <div class="flex justify-between items-center">
+                <div class="text-xl font-bold text-indigo-600">{{ '$' + product.price }}</div>
                 <span>
-                    <p-button icon="pi pi-heart" severity="secondary" [outlined]="true" />
-                    <p-button icon="pi pi-shopping-cart" class="ml-2" />
+                    <p-button icon="pi pi-heart" severity="secondary" [outlined]="true"></p-button>
+                    <p-button icon="pi pi-shopping-cart" class="ml-2"></p-button>
                 </span>
             </div>
         </div>

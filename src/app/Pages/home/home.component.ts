@@ -23,13 +23,20 @@ export class HomeComponent {
   constructor(private productService: ProductService) {}
 
   ngOnInit() {
-      this.productService.getCarouselProducts().then((products) => {
-          this.carouselProducts = products;
-      });
+    this.productService.getCarouselProducts().subscribe((products) => {
+      this.carouselProducts = products;
+    });
 
-      this.productService.getGridProducts().then((products) => {
-          this.gridProducts = products;
-      });
+    this.productService.getGridProducts().subscribe((products) => {
+      this.gridProducts = products;
+    });
+      // this.productService.getCarouselProducts().then((products) => {
+      //     this.carouselProducts = products;
+      // });
+
+      // this.productService.getGridProducts().then((products) => {
+      //     this.gridProducts = products;
+      // });
 
       this.responsiveOptions = [
           {
